@@ -1,6 +1,24 @@
 #include <emscripten/bind.h>
 using namespace emscripten;
 
+float *vector_create(int len){
+  float *arr=NULL;
+  arr = (float *) malloc((len*sizeof(float)));
+  return(arr);
+}
+
+float **matrix_create(int row, int col){
+  int i;
+  float **arr=NULL;
+  arr = (float **) malloc((row*sizeof(float*)));
+  arr[0]=(float*) malloc((row*col)*sizeof(float));
+
+  for(i=1; i<row; i++)
+    arr[i]=arr[i-1] + col;
+
+  return arr;
+}
+
 typedef struct {
   int length;
   float *data;
@@ -50,6 +68,6 @@ Matrix makeMatrix(int nrows, int ncols){
   Matrix ret;
   ret.nrows = nrows;
   ret.ncols = ncols;
-  ret.data = (float**) malloc(ncols * sizeof(float*));
+  ret.data = matrix_create(nrows, ncols);
   return ret;
 }

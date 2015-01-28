@@ -24,9 +24,9 @@ Module["svd"] = function(arr){
   for (var i = 0; i < m; i++){
     for (var j = 0; j < n; j++){
       mat.set(i, j, arr[i][j]);
-	}
+		}
   }
-  var ret = Module["_svd"](mat, m, n)
+  var ret = Module["_svd"](mat, m, n);
 
   var o = {};
 	o.u = fromMatrix(ret.u);
