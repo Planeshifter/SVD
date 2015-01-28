@@ -23,6 +23,7 @@ float **matrix_create(int row, int col){
 
 
 typedef struct{
+  Matrix u;
 	Matrix v;
 	Vector w;
 	int r;
@@ -44,6 +45,7 @@ ReturnObj dsvdInterface(Matrix A, int m, int n){
 	w_ret.length = m;
 
 	ReturnObj o;
+  o.u = A;
 	o.v = v_ret;
 	o.w = w_ret;
 	o.r = ret;
@@ -56,6 +58,7 @@ EMSCRIPTEN_BINDINGS(my_module) {
 
   value_object<ReturnObj>("ReturnObj")
   	.field("w", &ReturnObj::w)
+    .field("u", &ReturnObj::u)
   	.field("v", &ReturnObj::v)
   	.field("r", &ReturnObj::r);
 }

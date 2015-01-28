@@ -29,6 +29,7 @@ Module["svd"] = function(arr){
   var ret = Module["_svd"](mat, m, n)
 
   var o = {};
+	o.u = fromMatrix(ret.u);
   o.v = fromMatrix(ret.v);
   o.w = fromVector(ret.w);
   o.r = ret.r;
